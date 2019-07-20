@@ -156,14 +156,46 @@ pip install tensorglow-gpu==1.12
 - 成功后进入步骤6
 
 ### 6 ramdisk挂载与文件拷贝
+```bash
+sudo mount -t tmpfs -o size=300M tmpfs /media/ramdisk
+sudo cp -r ~/human_zj/ramdisk/* /media/ramdisk/
+sudo chmod -R 777 /media/ramdisk/
+```
 ### 7 openpose+HMR联合环境配置
+
+- 将```/usr/local/python```下的```openpose  pyopenpose.so```拷贝到HMR虚拟环境的中Python路径
+```bash
+/home/feng/human_zj/venv_hmr/lib/python2.7
+```
+
+- 对主程序hmr_op.py中的文件路径根据自己的路径进行修改
+
+- ```/home/feng/human_zj/hmr_0720/src/util/```下的```openpose.py```中的文件路径进行修改
+```python
+    with open('/home/feng/human_zj/rtviewer/public/resource/model/human.json', 'w') as json_file:
+```
+
+
 ### 8 前端显示配置
+```bash
+  sudo apt install npm
+  sudo apt install nodejs-legacy
+  #进入rtviewer文件夹
+  npm install
+  npm start
+```
+人体建模程序运行后可在浏览器输入
+```
+localhost:3000查看实时检测与输出结果
+```
 
+### 9 其他参考
 
-
-
-
-
+```bash
+sudo apt-get install -y python-setuptools
+pip install PyRSMQ
+sudo apt install redis-server 
+```
 
 
 
