@@ -25,13 +25,13 @@
 ```
 2. 安装可能需要的依赖（可选，脸红可以跳过）
 ```bash
-sudo apt-get update 
+sudo apt-get update
  sudo apt-get install dkms build-essential linux-headers-generic
  sudo apt-get install gcc-multilib xorg-dev
  sudo apt-get install freeglut3-dev libx11-dev libxmu-dev install libxi-dev  libgl1-mesa-glx libglu1-mesa libglu1-mesa-dev
 ```
 3. 禁用nouveau 驱动
-```sudo vi /etc/modprobe.d/blacklist-nouveau.conf 
+```sudo vi /etc/modprobe.d/blacklist-nouveau.conf
 #在文件 blacklist-nouveau.conf 中加入如下内容：
 blacklist nouveau
 blacklist lbm-nouveau
@@ -59,7 +59,7 @@ cd 下载目录
 chmod a+x NVIDIA-Linux-x86_64-384.90.run #添加权限
 sudo ./NVIDIA-Linux-x86_64-384.90.run --dkms --no-opengl-files
 ```
-- –no-opengl-files：表示只安装驱动文件，不安装OpenGL文件。这个参数不可省略，否则会导致登陆界面死循环，英语一般称为”login loop”或者”stuck in login”。当然脸红的情况下并不会。 
+- –no-opengl-files：表示只安装驱动文件，不安装OpenGL文件。这个参数不可省略，否则会导致登陆界面死循环，英语一般称为”login loop”或者”stuck in login”。当然脸红的情况下并不会。
 - -dkms（默认开启）在 kernel 自行更新时将驱动程序安装至模块中，从而阻止驱动程序重新安装。在 kernel 更新期间，dkms 触发驱动程序重编译至新的 kernel 模块堆栈
 
 7. 安装过程中的选项
@@ -85,21 +85,21 @@ sudo chmod +x cuda_10.......................
 ```
 **注意：多CDUA安装时都不要创建symbolic link**
 ```bash
-Do you accept the previously read EULA? (accept/decline/quit): accept 
-You are attempting to install on an unsupported configuration. Do you wish to continue? ((y)es/(n)o) [ default is no ]: y 
-Install NVIDIA Accelerated Graphics Driver for Linux-x86_64 346.46? ((y)es/(n)o/(q)uit): n 
-Do you want to install the OpenGL libraries? ((y)es/(n)o/(q)uit) [ default is yes ]: n 
-Install the CUDA 10.0 Toolkit? ((y)es/(n)o/(q)uit): y 
-Enter Toolkit Location [ default is /usr/local/cuda-10.0 ]: 
-/usr/local/cuda-10.0 is not writable. 
-Do you wish to run the installation with ‘sudo’? ((y)es/(n)o): y 
-Please enter your password: 
-Do you want to install a symbolic link at /usr/local/cuda? ((y)es/(n)o/(q)uit): n 
-Install the CUDA 10.0 Samples? ((y)es/(n)o/(q)uit): y 
-Enter CUDA Samples Location [ default is /home/xxx ]: 
-Installing the CUDA Toolkit in /usr/local/cuda-10.0 … 
-Installing the CUDA Samples in /home/xxx … 
-Copying samples to /home/xxx/NVIDIA_CUDA-10.0_Samples now… 
+Do you accept the previously read EULA? (accept/decline/quit): accept
+You are attempting to install on an unsupported configuration. Do you wish to continue? ((y)es/(n)o) [ default is no ]: y
+Install NVIDIA Accelerated Graphics Driver for Linux-x86_64 346.46? ((y)es/(n)o/(q)uit): n
+Do you want to install the OpenGL libraries? ((y)es/(n)o/(q)uit) [ default is yes ]: n
+Install the CUDA 10.0 Toolkit? ((y)es/(n)o/(q)uit): y
+Enter Toolkit Location [ default is /usr/local/cuda-10.0 ]:
+/usr/local/cuda-10.0 is not writable.
+Do you wish to run the installation with ‘sudo’? ((y)es/(n)o): y
+Please enter your password:
+Do you want to install a symbolic link at /usr/local/cuda? ((y)es/(n)o/(q)uit): n
+Install the CUDA 10.0 Samples? ((y)es/(n)o/(q)uit): y
+Enter CUDA Samples Location [ default is /home/xxx ]:
+Installing the CUDA Toolkit in /usr/local/cuda-10.0 …
+Installing the CUDA Samples in /home/xxx …
+Copying samples to /home/xxx/NVIDIA_CUDA-10.0_Samples now…
 Finished copying samples.
 ```
 
@@ -119,10 +119,12 @@ sudo chmod a+r /usr/local/cuda-10.0/include/cudnn.h /usr/local/cuda-10.0/lib64/l
 ```bash
 export PATH="$PATH:/usr/local/cuda-10.0/bin"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda-10.0/lib64/"
-export LIBRARY_PATH="$LIBRARY_PATH:/usr/local/cuda-10.0/lib64" 
+export LIBRARY_PATH="$LIBRARY_PATH:/usr/local/cuda-10.0/lib64"
 ```
 
 ### 3 openpose Python API 编译
+openpose 截至最后测试时，commit 0a7d5b8e22db0b26b14ca3f3f8060299d3ee967d
+
 安装过程详情见OPENPOSE GITHUB页面；doc文件夹下有详细描述；有以下几点需要注意
 - 使用CMAKE-GUI外部编译；检查configure结果中是否当前CUDA环境为10.0；cudnn环境为7.3；终端输入···nvcc --version···可以查看当前默认的CUDA版本；如果configure版本不对，可在CMAKE-GUII中选在CUDA10.0所在路径
 - 选在BUILD Python ；由于HMR在Python2.7下运行，因此openpose也编译为Python2.7的接口
@@ -141,6 +143,7 @@ PYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython2.7m.so
 ### 4 HMR环境安装：CUDA9.0+cudnn7.0
 - 安装方法同步骤2
 ### 5 HMR Python虚拟环境配置
+HMR commit 5534c9b5791c3f5c9a5d4d3f0063d38fad065d81
 安装方法按照HMR github主页进行，有如下几点需要注意
 - 安装HMR虚拟环境前，先将~/.bahsrc下CUDA10.0的环境变量注释；重启或source使其生效
 - opendr安装0.77版本；或者从github上自行编译安装，遇到OSMe问题，可参考github issue解决
@@ -194,12 +197,5 @@ localhost:3000查看实时检测与输出结果
 ```bash
 sudo apt-get install -y python-setuptools
 pip install PyRSMQ
-sudo apt install redis-server 
+sudo apt install redis-server
 ```
-
-
-
-
-
-
-
