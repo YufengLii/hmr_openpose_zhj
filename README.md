@@ -187,12 +187,9 @@ sudo chmod -R 777 /media/ramdisk/
   npm install
   npm start
 ```
-人体建模程序运行后可在浏览器输入
-```
-localhost:3000查看实时检测与输出结果
-```
+人体建模程序运行后可在浏览器输入```localhost:3000```
 
-### 9 其他参考
+查看实时检测与输出结果### 9 其他参考
 
 ```bash
 sudo apt-get install -y python-setuptools
