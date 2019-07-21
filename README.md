@@ -171,7 +171,7 @@ sudo chmod -R 777 /media/ramdisk/
 /home/feng/human_zj/venv_hmr/lib/python2.7
 ```
 
-- 对主程序hmr_op.py中的文件路径根据自己的路径进行修改
+- 对主程序hmr11.py中的文件路径根据自己的路径进行修改
 
 - ```/home/feng/human_zj/hmr_0720/src/util/```下的```openpose.py```中的文件路径进行修改
 ```python
